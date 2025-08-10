@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  backend:
+    build:
+      context: ./CorellianBack
+    ports:
+      - "5001:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:5000
+    volumes:
+      - ./CorellianBack/appsettings.Development.json:/app/appsettings.Development.json
+  frontend:
+    build:
+      context: ./CorellianFront
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_GRAPHQL_ENDPOINT=http://localhost:5001/graphql
+    depends_on:
+      - backend
+    stdin_open: true
+    tty: true
