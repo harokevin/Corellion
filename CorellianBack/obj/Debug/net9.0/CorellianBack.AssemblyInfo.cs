@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CorellianBack")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+12c0c09402ae92e65ef795152aee6f5b1606b5a1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d4501bfbb5a7f35ab4e45b4ef63ce4999618a427")]
 [assembly: System.Reflection.AssemblyProductAttribute("CorellianBack")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CorellianBack")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

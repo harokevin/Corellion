@@ -94,3 +94,67 @@ This project is a full-stack task management application built to demonstrate ra
 ---
 
 **Thank you for reviewing this
+
+
+## Adding New Models to Corellian
+
+To extend the data model (for example, adding procurement features), follow these general steps:
+
+1. **Create Model Classes**  
+   - Add new C# classes in the `CorellianBack` folder (e.g., `Vendor.cs`, `Product.cs`, `PurchaseOrder.cs`, etc.).
+   - Define properties and relationships using navigation properties and data annotations.
+
+2. **Register Models in AppDbContext**  
+   - Open `AppDbContext.cs`.
+   - Add a `DbSet<YourModel>` property for each new model.
+   - Configure relationships in `OnModelCreating` if needed.
+
+3. **(Optional) Update GraphQL Schema**  
+   - Add new types, queries, or mutations in your GraphQL setup (e.g., in `Query.cs` or `Mutation.cs`) to expose the new models via the API.
+
+4. **Create and Apply Entity Framework Migrations**  
+   - In the `CorellianBack` directory, run:
+     ```sh
+     dotnet ef migrations add <MigrationName>
+     dotnet ef database update
+     ```
+   - This updates the SQLite database schema to match your new models.
+
+5. **Verify**  
+   - Use a SQLite browser or query tool to confirm new tables exist.
+   - Test your API endpoints or GraphQL queries/mutations for the new models.
+
+**Tip:**  
+If you encounter migration errors (e.g., table already exists), you may need to delete the `tasks.db` file and re-run migrations during development.
+
+---
+
+## Undoing Migrations (Development Tips)
+
+During development, you may want to undo or redo migrations if you make a mistake or want to reset your schema changes. Here’s how:
+
+1. **Remove the Last Migration (without affecting the database):**
+   ```sh
+   dotnet ef migrations remove
+   ```
+   This deletes the last migration file but does not change the database.
+
+2. **Revert the Database to a Previous Migration:**
+   ```sh
+   dotnet ef database update <PreviousMigrationName>
+   ```
+   Replace `<PreviousMigrationName>` with the name of the migration you want to revert to. This will roll back the database schema.
+
+3. **Delete All Migrations and Start Fresh (Development Only):**
+   - Delete all files in the `Migrations/` folder.
+   - Optionally, delete the `tasks.db` file to reset the database.
+   - Recreate your initial migration:
+     ```sh
+     dotnet ef migrations add InitialCreate
+     dotnet ef database update
+     ```
+
+**Note:**  
+These steps are intended for development. In production, always use migrations carefully to avoid data loss.
+
+---
